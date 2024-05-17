@@ -6,17 +6,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import org.jfree.chart.*;
-
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.DatasetUtils;
-import org.jfree.chart.plot.PlotOrientation;
-import java.awt.image.BufferedImage;
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 
 public class Analysis {
-    private JFreeChart chart;
     private String category;
     private ArrayList<String> attributes;
     private ArrayList<Row> data;
@@ -30,64 +21,59 @@ public class Analysis {
     }
 
     public void Analysishub(){
-        System.out.println("Which attribute?");
-        chart = createBarChart();
-        Scanner scan2 = new Scanner(System.in);
-        System.out.println("Which attribute?");
-        //for(String item: attributes){
-            //System.out.print("  " + item + "?");
-        //}
-        int i = 0;
-        //if(!(scan2.nextLine().equals(""))){
-            //for(int i = 0; i <attributes.size(); i++){
-                //if(scan2.nextLine().equals(attributes.get(i))){
-                    selectChart(i);
-                //}
-            //}
-        //}
-    }
-
-    public void selectChart(int k){
-        Scanner scan2 = new Scanner(System.in);
-        System.out.println("Which chart?");
-        //for(String item: charts){
-            //System.out.print("  " + item + "?");
-        //}
-        //if(!(scan2.nextLine().equals(""))){
-            //for(int i = 0; i <charts.length; i++){
-                //if(scan2.nextLine().equals(charts[i])){
-                    //if(i == 0){
-                        testPlot();
-                    //}else if(i == 1){
-
-                    //}
-                //}
-            //}
-        //}
-    }
-
-    private static JFreeChart createBarChart() {
-        Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
-        //<String, String>
-        CategoryDataset dataset 
-                = DatasetUtils.createCategoryDataset("S", "C", data);
-        return ChartFactory.createBarChart("Bar Chart", "Domain", "Range", 
-                dataset, PlotOrientation.HORIZONTAL, true, true, true);
-    }
-
-    public void testPlot(){
-        try {
-            BufferedImage image = new BufferedImage(200 , 100,
-                    BufferedImage.TYPE_INT_RGB);
-            Graphics2D g2 = image.createGraphics();
-            this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
-                    null);
-            g2.dispose();
-        }
-        catch (Exception e) {
-            //fail("There should be no exception.");
+        for(int i = 0; i<attributes.size();i++){
+            //find max
+            System.out.print("Maximum  "+ attributes.get(i) +" is ");
+            int temp = findMax(i);
+            System.out.print(data.get(temp).getName() + " with a " + data.get(temp).getData().get(i) + "\n");
+            //find min
+            System.out.print("Minimum  "+ attributes.get(i) +" is ");
+            temp = findMin(i);
+            System.out.print(data.get(temp).getName() + " with a " + data.get(temp).getData().get(i) + "\n");
+            //find average
+            System.out.print("Average  "+ attributes.get(i) +" is " + findAverage(i) + "\n");
         }
     }
+
+    public int findMax(int i){
+        double max = data.get(0).getData().get(i);
+        int maxI = 0;
+        for(int r = 1; r<data.size(); r++){
+            if(data.get(r).getData().get(i)>max){
+                max = data.get(r).getData().get(i);
+                maxI = r;
+            }
+        }
+        return maxI;
+
+    }
+
+    public int findMin(int i){
+        double min = data.get(0).getData().get(i);
+        int minI = 0;
+        for(int r = 1; r<data.size(); r++){
+            if(data.get(r).getData().get(i)<min){
+                min = data.get(r).getData().get(i);
+                minI = r;
+            }
+        }
+        return minI;
+
+    }
+
+    public Double findAverage(int i){
+        double Average = 0;
+        for(int r = 0; r<data.size(); r++){
+            Average = Average+ data.get(r).getData().get(i);
+        }
+        return Average;
+
+    }
+
+
+    
+
+
 
 }
 

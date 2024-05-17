@@ -23,14 +23,10 @@ public class App {
             //} 
         Reader reader = new Reader();
         reader.scan();
-        System.out.println("reader");
-        System.out.println("Give Analysis? y for yes");
-        Scanner scan = new Scanner(System.in);
-        //scanner for y/n
-        //if(scan.nextLine().equals("y")){
-            Analysis analysis = new Analysis(reader);
-            analysis.Analysishub();
-        //}
+        
+        
+        Analysis analysis = new Analysis(reader);
+        analysis.Analysishub();
 
         
         
