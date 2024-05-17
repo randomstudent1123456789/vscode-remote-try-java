@@ -4,27 +4,19 @@
  *---------------------------------------------------------------------------------------*/
 
 package com.mycompany.app;
-//import java.io.Reader;
 
-import java.io.File;
-import java.util.Scanner;
+
+
 public class App {
     public static void main(String[] args) {
         
-        System.out.println("Hello Remote World!");
-        //File f = new File("/workspaces/vscode-remote-try-java/src/main/java/com/mycompany/app"); 
-        //String[] files = f.list(); 
-  
-            //System.out.println("Files are:"); 
-  
-            // Display the names of the files 
-            //for (int i = 0; i < files.length; i++) { 
-                //System.out.println(files[i]); 
-            //} 
+        //System.out.println("Hello Remote World!");
+        
+        //creates a reader object to read the csv file and scan it
         Reader reader = new Reader();
         reader.scan();
         
-        
+        //creates an analysis class that will print out various statistics about it
         Analysis analysis = new Analysis(reader);
         analysis.Analysishub();
 

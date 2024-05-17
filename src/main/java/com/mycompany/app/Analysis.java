@@ -8,19 +8,22 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Analysis {
+    //stores the data of reader class given for easier access
     private String category;
     private ArrayList<String> attributes;
     private ArrayList<Row> data;
     private String[] charts;
     
-
+    //constructor that takes in the reader class and it's data
     public Analysis(Reader reader){
         data = reader.getData();
         category = reader.getCategory();
         attributes = reader.getAttributes();
     }
 
+    //main method of the analysis class it will call all of the statistical methods
     public void Analysishub(){
+        //iterates through each column of data
         for(int i = 0; i<attributes.size();i++){
             //find max
             System.out.print("Maximum  "+ attributes.get(i) +" is ");
@@ -36,6 +39,7 @@ public class Analysis {
     }
 
     public int findMax(int i){
+        //intuitive linear comparision algorithim 
         double max = data.get(0).getData().get(i);
         int maxI = 0;
         for(int r = 1; r<data.size(); r++){
@@ -49,6 +53,7 @@ public class Analysis {
     }
 
     public int findMin(int i){
+        //intuitive linear comparision algorithim 
         double min = data.get(0).getData().get(i);
         int minI = 0;
         for(int r = 1; r<data.size(); r++){
@@ -62,6 +67,7 @@ public class Analysis {
     }
 
     public Double findAverage(int i){
+        //iterates through each rows specific attribute in the i column and finds the average
         double Average = 0;
         for(int r = 0; r<data.size(); r++){
             Average = Average+ data.get(r).getData().get(i);
